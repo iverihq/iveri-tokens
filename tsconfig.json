@@ -1,0 +1,11 @@
+{
+  "extends": "@iveri/tsconfig/base.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist/cjs"
+  },
+  // Specs are included here so type-aware linting and the editor can see them. The two build
+  // configs exclude them from the emitted output.
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

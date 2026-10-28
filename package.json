@@ -1,0 +1,57 @@
+{
+  "name": "@iveri/tokens",
+  "version": "0.1.0",
+  "description": "The Iveri design tokens — one copy of the palette, the radii and the motion scale, for the web and for React Native. Zero runtime dependencies.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iverihq/iveri-tokens.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@9.12.0",
+  "type": "commonjs",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/cjs/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "clean": "rimraf dist tsconfig.*.tsbuildinfo",
+    "build": "pnpm clean && tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json && node ./scripts/write-dist-package-json.mjs && node ./scripts/verify-zero-runtime-deps.mjs && node ./scripts/verify-loadable.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "jest",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "prettier": "@iveri/prettier-config",
+  "devDependencies": {
+    "@iveri/eslint-config": "^0.1.0",
+    "@iveri/prettier-config": "^0.1.0",
+    "@iveri/tsconfig": "^0.1.0",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.10.7",
+    "eslint": "^9.18.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.4.2",
+    "rimraf": "^6.0.1",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.7.3"
+  }
+}
