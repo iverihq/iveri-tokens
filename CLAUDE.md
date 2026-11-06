@@ -49,6 +49,6 @@ pass, because the source was legal under the `moduleResolution` it compiles with
 
 Bump `version` in the PR. After it merges, tag the merge commit and push that one tag —
 `git tag -a vX.Y.Z -m vX.Y.Z && git push origin vX.Y.Z`, never `--follow-tags`, which also pushes
-every older local tag that was never pushed. Publishing is npm trusted publishing (OIDC), so there
-is no token to rotate. CI checks the tag matches
-`package.json` before publishing. npm versions are permanent.
+every older local tag that was never pushed. Publishing uses the org-level `NPM_TOKEN` secret, a
+granular token npm caps at 90 days — an `E404` on the publish PUT means it has expired. CI checks the
+tag matches `package.json` before publishing. npm versions are permanent.
