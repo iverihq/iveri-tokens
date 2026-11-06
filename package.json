@@ -38,9 +38,9 @@
   },
   "prettier": "@iveri/prettier-config",
   "devDependencies": {
-    "@iveri/eslint-config": "^0.2.1",
+    "@iveri/eslint-config": "^0.2.3",
     "@iveri/prettier-config": "^0.1.0",
-    "@iveri/tsconfig": "^0.2.0",
+    "@iveri/tsconfig": "^0.2.1",
     "eslint": "^10.14.0",
     "prettier": "^3.9.10",
     "rimraf": "^6.1.4",
