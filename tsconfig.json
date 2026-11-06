@@ -1,11 +1,14 @@
 {
-  "extends": "@iveri/tsconfig/base.json",
+  "extends": "@iveri/tsconfig/node.json",
   "compilerOptions": {
     "rootDir": "./src",
-    "outDir": "./dist/cjs"
+    "outDir": "./dist",
+    // This package is compiled into browser and React Native bundles, so nothing in it may lean
+    // on Node's globals. An empty list keeps `Buffer` and `process` from type-checking here at
+    // all — the type-level half of the zero-runtime-dependency rule.
+    "types": []
   },
-  // Specs are included here so type-aware linting and the editor can see them. The two build
-  // configs exclude them from the emitted output.
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  // Specs are included so type-aware linting and the editor can see them; the build config
+  // leaves them out of the emitted output.
+  "include": ["src/**/*"]
 }

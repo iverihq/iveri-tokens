@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    // Maps would point at `src/`, which is not published. The declarations carry every comment a
+    // consumer's editor shows, so the maps would add a broken link and nothing else.
+    "declarationMap": false,
+    "sourceMap": false,
+    "incremental": false
+  },
+  "exclude": ["src/**/*.spec.ts"]
+}
