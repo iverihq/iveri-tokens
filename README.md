@@ -1,7 +1,8 @@
 # @iveri/tokens
 
 The Iveri design tokens — **one** copy of the palette, the radii and the motion scale, readable
-from a browser bundle, a Tailwind config and React Native alike. Zero runtime dependencies.
+from a browser bundle, a Tailwind theme and React Native alike. Zero runtime dependencies.
+Published as native ES modules only; Metro and Node 26 load it through `require` as well.
 
 ```bash
 pnpm add @iveri/tokens

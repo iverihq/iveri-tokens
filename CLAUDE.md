@@ -8,7 +8,7 @@ annotated release tags stay reachable from `main`.
 
 **Plain data and pure functions, nothing else.** `scripts/verify-zero-runtime-deps.mjs` fails the
 build on a dependency of any kind, including a peer — this is compiled into browser bundles, into
-a Tailwind config that jiti loads as CommonJS, and into two React Native apps through Metro.
+into `@iveri/react-kit`'s Tailwind theme, and into three React Native apps through Metro.
 
 A token belongs here when **both** platforms genuinely share it. A shadow does not: it is
 `box-shadow` on the web and `shadowOffset`/`elevation` on React Native, the same intent expressed
@@ -18,8 +18,11 @@ at all.
 
 ## `verify-loadable.mjs` is the check that matters
 
-It loads the built artefact through **both** loaders and asserts the two agree. `@iveri/react-kit`
-shipped twice with a defect that lived only in the emitted output — a directory import Node ESM
+Since 0.2.0 the package is **ESM-only**: one build, an exports map offering exactly `types` and
+`default`. The script imports **and** requires the entry point through that map and asserts both
+hand back the same module. `default` rather than `import` is the load-bearing part — Metro
+resolves with the `require` and `default` conditions, so an `import`-only map builds every web
+app and breaks every Expo app. `@iveri/react-kit` shipped twice with a defect that lived only in the emitted output — a directory import Node ESM
 rejects, then an entry point the CJS loader could not see — and in both cases `tsc` was right to
 pass, because the source was legal under the `moduleResolution` it compiles with.
 
@@ -44,5 +47,8 @@ pass, because the source was legal under the `moduleResolution` it compiles with
 
 ## Releasing
 
-`npm version <patch|minor|major>` then `git push --follow-tags`. CI checks the tag matches
-`package.json` before publishing. npm versions are permanent.
+Bump `version` in the PR. After it merges, tag the merge commit and push that one tag —
+`git tag -a vX.Y.Z -m vX.Y.Z && git push origin vX.Y.Z`, never `--follow-tags`, which also pushes
+every older local tag that was never pushed. Publishing uses the org-level `NPM_TOKEN` secret, a
+granular token npm caps at 90 days — an `E404` on the publish PUT means it has expired. CI checks the
+tag matches `package.json` before publishing. npm versions are permanent.

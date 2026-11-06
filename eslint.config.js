@@ -1,10 +1,3 @@
-const { base } = require('@iveri/eslint-config');
+import { node } from '@iveri/eslint-config';
 
-module.exports = [
-    ...base,
-    {
-        languageOptions: {
-            parserOptions: { tsconfigRootDir: __dirname },
-        },
-    },
-];
+export default [...node, { languageOptions: { parserOptions: { tsconfigRootDir: import.meta.dirname } } }];

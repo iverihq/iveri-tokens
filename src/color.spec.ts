@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import { color, productColor, toRgbChannels } from './color.js';
 import { duration, easing, radius } from './scale.js';
 
